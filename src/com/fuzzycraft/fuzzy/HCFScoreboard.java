@@ -2,6 +2,12 @@ package com.fuzzycraft.fuzzy;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * 
+ * @author FuzzyStatic (fuzzy@fuzzycraft.com)
+ *
+ */
+
 public class HCFScoreboard extends JavaPlugin {
 	public void onEnable() {		
 		configDefaults();		
