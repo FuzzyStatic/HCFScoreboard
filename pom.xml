@@ -1,0 +1,39 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>localdomain.localhost.tutorial</groupId>
+	<artifactId>java-archive</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0</version>
+	<repositories>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+        </repository>
+	</repositories>
+    <!--Spigot-API-->
+    <dependencies>	
+    	<dependency>
+    	    <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+    		<version>1.8.7-R0.1-SNAPSHOT</version>
+    	</dependency>
+    	<!--Bukkit API-->
+    	<dependency>
+    	    <groupId>org.bukkit</groupId>
+    	    <artifactId>bukkit</artifactId>
+    	    <version>1.8.7-R0.1-SNAPSHOT</version>
+    	</dependency>
+    </dependencies>
+    <build>
+        <finalName>HCFScoreboard</finalName>
+        <sourceDirectory>src/com/fuzzycraft/fuzzy</sourceDirectory>
+        <resources>
+	        <resource>
+	            <directory>src</directory>
+	            <includes>
+	                <include>*.yml</include>
+	            </includes>
+	        </resource>
+        </resources>
+    </build>
+</project>
