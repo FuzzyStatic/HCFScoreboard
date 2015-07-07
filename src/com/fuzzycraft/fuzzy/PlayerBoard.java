@@ -4,7 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
@@ -18,11 +17,9 @@ public class PlayerBoard {
 	private Scoreboard board;
 	private Objective objective;
 	private Team team;
-	private Score scoreST;
-	private Score scorePC;
 	
 	/**
-	 * Set player for board
+	 * Set player for board.
 	 * @param player
 	 */
 	public PlayerBoard(Player player) {
@@ -30,7 +27,7 @@ public class PlayerBoard {
 	}
 	
 	/**
-	 * Create Scoreboard for player
+	 * Create Scoreboard for player.
 	 */
 	public void createPlayerBoard() {
 		this.manager = Bukkit.getScoreboardManager();
@@ -42,9 +39,7 @@ public class PlayerBoard {
 		this.objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 		this.objective.setDisplayName(Defaults.TITLE);
 		this.player.setScoreboard(this.board);
-		this.scoreST = objective.getScore(Defaults.SPAWN_TAG);
-		this.scoreST.setScore(60);
-		this.scorePC = objective.getScore(Defaults.PEARL_COOLDOWN);
-		this.scorePC.setScore(12);
+		this.objective.getScore(Defaults.SPAWN_TAG).setScore(0);
+		this.objective.getScore(Defaults.PEARL_COOLDOWN).setScore(0);
 	}
 }
