@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.Objective;
@@ -35,7 +36,7 @@ public class PlayerTagged implements Listener {
 	}
 	
 	/**
-	 * Create board for joining player.
+	 * Check for player damage.
 	 * @param event
 	 */
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
@@ -71,18 +72,44 @@ public class PlayerTagged implements Listener {
         }
     }
 	
+	/**
+	 * Check for player death.
+	 * @param event
+	 */
+	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+	public void onEntityDeath(EntityDeathEvent event) {
+		if (!(event.getEntity() instanceof Player)) {
+            return;
+        }
+		
+		Player player = (Player) event.getEntity();
+		
+		if(this.map.containsKey(player) && this.map.get(player) != null) {
+    		cancel(this.map.get(player));
+    	}
+		
+    	cooldown(player, 0);
+	}
+	
+	/**
+	 * Set cooldown timer.
+	 * @param player
+	 * @param cooldownTime
+	 */
 	public void cooldown(final Player player, int cooldownTime) {
-		// Get Scoreboard for player
-		Objective objective = player.getScoreboard().getObjective("timers");
-		
-		if (cooldownTime < 0) {
-			// Set time to 0
-			objective.getScore(Defaults.SPAWN_TAG).setScore(0);
-			return;
+		if (player.isOnline()) {
+			// Get Scoreboard for player
+			Objective objective = player.getScoreboard().getObjective("timers");
+			
+			if (cooldownTime < 0) {
+				// Set time to 0
+				objective.getScore(Defaults.SPAWN_TAG).setScore(0);
+				return;
+			}
+			
+			// Set time.
+			objective.getScore(Defaults.SPAWN_TAG).setScore(cooldownTime);
 		}
-		
-		// Set time.
-		objective.getScore(Defaults.SPAWN_TAG).setScore(cooldownTime);
 				
 		// Decrement timer.
 		final int newTime = --cooldownTime;
@@ -98,6 +125,9 @@ public class PlayerTagged implements Listener {
 		);
 	}
 	
+	/** Cancel given task. Used to make sure there are not multiple timers running for one person.
+	 * @param task
+	 */
 	public void cancel(BukkitTask task) {
 		task.cancel();
 	}
