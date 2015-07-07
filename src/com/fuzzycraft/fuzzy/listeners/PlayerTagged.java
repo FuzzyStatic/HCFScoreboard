@@ -1,6 +1,5 @@
 package com.fuzzycraft.fuzzy.listeners;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -10,8 +9,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
 
 import com.fuzzycraft.fuzzy.HCFScoreboard;
@@ -64,20 +61,21 @@ public class PlayerTagged implements Listener {
         }
     }
 	
-	public void cooldown(final Player player, int cooldownTime) {	
-		if (cooldownTime == 0) {
+	public void cooldown(final Player player, int cooldownTime) {
+		// Get Scoreboard for player
+		Objective objective = player.getScoreboard().getObjective("timers");
+		
+		if (cooldownTime < 0) {
+			// Set time to 0
+			objective.getScore(Defaults.SPAWN_TAG).setScore(0);
 			return;
 		}
 		
+		// Set time.
+		objective.getScore(Defaults.SPAWN_TAG).setScore(cooldownTime);
+				
 		// Decrement timer.
-		final int newTime = cooldownTime--;
-		
-		// Get Scoreboard for player.
-		ScoreboardManager manager = Bukkit.getScoreboardManager();
-		Scoreboard board = manager.getNewScoreboard();
-		Team team = board.getPlayerTeam(player);
-		Objective objective = team.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
-		objective.getScore(Defaults.SPAWN_TAG).setScore(newTime);
+		final int newTime = --cooldownTime;
 		
 		// Create the task anonymously to decrement timer.
 		new BukkitRunnable() {
