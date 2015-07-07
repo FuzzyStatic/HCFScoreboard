@@ -1,5 +1,7 @@
 package com.fuzzycraft.fuzzy.listeners;
 
+import java.util.HashMap;
+
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -7,9 +9,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Team;
 
 import com.fuzzycraft.fuzzy.HCFScoreboard;
 import com.fuzzycraft.fuzzy.constants.Defaults;
@@ -23,6 +24,7 @@ import com.fuzzycraft.fuzzy.constants.Defaults;
 public class PlayerTagged implements Listener {
 		
 	public HCFScoreboard plugin;
+	private HashMap<Player, BukkitTask> map = new HashMap<Player, BukkitTask>();
 
 	/**
 	 * Constructs listener for PlayerTagged.
@@ -56,6 +58,14 @@ public class PlayerTagged implements Listener {
         }
         
         if (damager != null && damager != event.getEntity()) {
+        	if(this.map.containsKey(player) && this.map.get(player) != null) {
+        		cancel(this.map.get(player));
+        	}
+        	
+        	if(this.map.containsKey(damager) && this.map.get(damager) != null) {
+        		cancel(this.map.get(damager));
+        	}
+        	
         	cooldown(player, Defaults.SPAWN_TAG_TIMER);
         	cooldown(damager, Defaults.SPAWN_TAG_TIMER);
         }
@@ -78,12 +88,17 @@ public class PlayerTagged implements Listener {
 		final int newTime = --cooldownTime;
 		
 		// Create the task anonymously to decrement timer.
-		new BukkitRunnable() {
+		map.put(player, new BukkitRunnable() {
 		      
-			public void run() {
-				cooldown(player, newTime);
-			}
+				public void run() {
+					cooldown(player, newTime);
+				}
 				
-		}.runTaskLater(this.plugin, 20);
+			}.runTaskLater(this.plugin, 20)
+		);
+	}
+	
+	public void cancel(BukkitTask task) {
+		task.cancel();
 	}
 }
