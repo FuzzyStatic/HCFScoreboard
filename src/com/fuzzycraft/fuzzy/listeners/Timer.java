@@ -12,7 +12,7 @@ import com.fuzzycraft.fuzzy.HCFScoreboard;
 public class Timer {
 	
 	public HCFScoreboard plugin;
-	private HashMap<Player, BukkitTask> map = new HashMap<Player, BukkitTask>();
+	protected HashMap<Player, BukkitTask> map = new HashMap<Player, BukkitTask>();
 
 	/**
 	 * Constructs listener for PlayerTagged.

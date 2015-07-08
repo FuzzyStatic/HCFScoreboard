@@ -1,7 +1,5 @@
 package com.fuzzycraft.fuzzy.listeners.timers;
 
-import java.util.HashMap;
-
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -9,7 +7,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.scheduler.BukkitTask;
 
 import com.fuzzycraft.fuzzy.HCFScoreboard;
 import com.fuzzycraft.fuzzy.constants.Defaults;
@@ -23,9 +20,7 @@ import com.fuzzycraft.fuzzy.listeners.Timer;
  */
 
 public class PlayerTagged extends Timer implements Listener {
-		
-	private HashMap<Player, BukkitTask> map = new HashMap<Player, BukkitTask>();
-	
+			
 	/**
 	 * Constructor
 	 * @param plugin
@@ -59,11 +54,11 @@ public class PlayerTagged extends Timer implements Listener {
         
         if (damager != null && damager != event.getEntity()) {
         	if(this.map.containsKey(player) && this.map.get(player) != null) {
-        		cancel(this.map.get(player));
+        		cancel(super.map.get(player));
         	}
         	
         	if(this.map.containsKey(damager) && this.map.get(damager) != null) {
-        		cancel(this.map.get(damager));
+        		cancel(super.map.get(damager));
         	}
         	
         	super.cooldown(player, Defaults.SPAWN_TAG_TIMER, DefaultsConverted.getSpawnTag());

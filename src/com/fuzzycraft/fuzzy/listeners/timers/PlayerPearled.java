@@ -1,14 +1,11 @@
 package com.fuzzycraft.fuzzy.listeners.timers;
 
-import java.util.HashMap;
-
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.scheduler.BukkitTask;
 
 import com.fuzzycraft.fuzzy.HCFScoreboard;
 import com.fuzzycraft.fuzzy.constants.Defaults;
@@ -22,8 +19,6 @@ import com.fuzzycraft.fuzzy.listeners.Timer;
  */
 
 public class PlayerPearled extends Timer implements Listener {
-
-	private HashMap<Player, BukkitTask> map = new HashMap<Player, BukkitTask>();
 
 	/**
 	 * Constructor
@@ -42,7 +37,7 @@ public class PlayerPearled extends Timer implements Listener {
         Player player = (Player) event.getEntity().getShooter();
         
         if(this.map.containsKey(player) && this.map.get(player) != null) {
-    		super.cancel(this.map.get(player));
+    		super.cancel(super.map.get(player));
     	}
         
     	super.cooldown(player, Defaults.PEARL_COOLDOWN_TIMER, DefaultsConverted.getPearlCooldown());
