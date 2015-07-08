@@ -4,6 +4,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.fuzzycraft.fuzzy.listeners.PlayerJoin;
+import com.fuzzycraft.fuzzy.listeners.PlayerPearled;
 import com.fuzzycraft.fuzzy.listeners.PlayerTagged;
 
 /**
@@ -20,8 +21,9 @@ public class HCFScoreboard extends JavaPlugin {
 	
 	public void registerListeners() {
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvents(new PlayerTagged(this), this);
 		pm.registerEvents(new PlayerJoin(), this);
+		pm.registerEvents(new PlayerPearled(this), this);
+		pm.registerEvents(new PlayerTagged(this), this);
 	}
 	
 	public void configDefaults() {

@@ -6,6 +6,7 @@ import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -21,7 +22,7 @@ import com.fuzzycraft.fuzzy.constants.DefaultsConverted;
  *
  */
 
-public class PlayerPearled {
+public class PlayerPearled implements Listener {
 
 	public HCFScoreboard plugin;
 	private HashMap<Player, BukkitTask> map = new HashMap<Player, BukkitTask>();
