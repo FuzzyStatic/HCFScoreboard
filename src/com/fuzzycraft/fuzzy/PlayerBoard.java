@@ -6,7 +6,6 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
-import com.fuzzycraft.fuzzy.constants.Defaults;
 import com.fuzzycraft.fuzzy.constants.DefaultsConverted;
 
 public class PlayerBoard {
