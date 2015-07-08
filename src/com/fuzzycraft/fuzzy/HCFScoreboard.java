@@ -4,8 +4,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.fuzzycraft.fuzzy.listeners.PlayerJoin;
-import com.fuzzycraft.fuzzy.listeners.PlayerPearled;
-import com.fuzzycraft.fuzzy.listeners.PlayerTagged;
+import com.fuzzycraft.fuzzy.listeners.timers.PlayerPearled;
+import com.fuzzycraft.fuzzy.listeners.timers.PlayerTagged;
 
 /**
  * 

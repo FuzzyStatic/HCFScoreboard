@@ -1,4 +1,4 @@
-package com.fuzzycraft.fuzzy.listeners;
+package com.fuzzycraft.fuzzy.listeners.timers;
 
 import java.util.HashMap;
 
@@ -16,6 +16,7 @@ import org.bukkit.scoreboard.Objective;
 import com.fuzzycraft.fuzzy.HCFScoreboard;
 import com.fuzzycraft.fuzzy.constants.Defaults;
 import com.fuzzycraft.fuzzy.constants.DefaultsConverted;
+import com.fuzzycraft.fuzzy.listeners.Timer;
 
 /**
  * 
@@ -23,17 +24,16 @@ import com.fuzzycraft.fuzzy.constants.DefaultsConverted;
  *
  */
 
-public class PlayerTagged implements Listener {
+public class PlayerTagged extends Timer implements Listener {
 		
-	public HCFScoreboard plugin;
 	private HashMap<Player, BukkitTask> map = new HashMap<Player, BukkitTask>();
-
+	
 	/**
-	 * Constructs listener for PlayerTagged.
+	 * Constructor
 	 * @param plugin
 	 */
 	public PlayerTagged(HCFScoreboard plugin) {
-		this.plugin = plugin;
+		super(plugin);
 	}
 	
 	/**
@@ -68,8 +68,8 @@ public class PlayerTagged implements Listener {
         		cancel(this.map.get(damager));
         	}
         	
-        	cooldown(player, Defaults.SPAWN_TAG_TIMER);
-        	cooldown(damager, Defaults.SPAWN_TAG_TIMER);
+        	super.cooldown(player, Defaults.SPAWN_TAG_TIMER, DefaultsConverted.getSpawnTag());
+        	super.cooldown(damager, Defaults.SPAWN_TAG_TIMER, DefaultsConverted.getSpawnTag());
         }
     }
 	
@@ -89,47 +89,6 @@ public class PlayerTagged implements Listener {
     		cancel(this.map.get(player));
     	}
 		
-    	cooldown(player, 0);
-	}
-	
-	/**
-	 * Set cooldown timer.
-	 * @param player
-	 * @param cooldownTime
-	 */
-	public void cooldown(final Player player, int cooldownTime) {
-		if (player.isOnline()) {
-			// Get Scoreboard for player
-			Objective objective = player.getScoreboard().getObjective("timers");
-			
-			if (cooldownTime < 0) {
-				// Set time to 0
-				objective.getScore(DefaultsConverted.getSpawnTag()).setScore(0);
-				return;
-			}
-			
-			// Set time.
-			objective.getScore(DefaultsConverted.getSpawnTag()).setScore(cooldownTime);
-		}
-				
-		// Decrement timer.
-		final int newTime = --cooldownTime;
-		
-		// Create the task anonymously to decrement timer.
-		map.put(player, new BukkitRunnable() {
-		      
-				public void run() {
-					cooldown(player, newTime);
-				}
-				
-			}.runTaskLater(this.plugin, 20)
-		);
-	}
-	
-	/** Cancel given task. Used to make sure there are not multiple timers running for one person.
-	 * @param task
-	 */
-	public void cancel(BukkitTask task) {
-		task.cancel();
+    	super.cooldown(player, 0, DefaultsConverted.getSpawnTag());
 	}
 }
