@@ -15,6 +15,7 @@ import org.bukkit.scoreboard.Objective;
 
 import com.fuzzycraft.fuzzy.HCFScoreboard;
 import com.fuzzycraft.fuzzy.constants.Defaults;
+import com.fuzzycraft.fuzzy.constants.DefaultsConverted;
 
 /**
  * 
@@ -103,12 +104,12 @@ public class PlayerTagged implements Listener {
 			
 			if (cooldownTime < 0) {
 				// Set time to 0
-				objective.getScore(Defaults.SPAWN_TAG).setScore(0);
+				objective.getScore(DefaultsConverted.getSpawnTag()).setScore(0);
 				return;
 			}
 			
 			// Set time.
-			objective.getScore(Defaults.SPAWN_TAG).setScore(cooldownTime);
+			objective.getScore(DefaultsConverted.getSpawnTag()).setScore(cooldownTime);
 		}
 				
 		// Decrement timer.

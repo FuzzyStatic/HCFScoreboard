@@ -7,7 +7,7 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
 import com.fuzzycraft.fuzzy.constants.Defaults;
-import com.fuzzycraft.fuzzy.utilities.TextReplace;
+import com.fuzzycraft.fuzzy.constants.DefaultsConverted;
 
 public class PlayerBoard {
 
@@ -28,9 +28,9 @@ public class PlayerBoard {
 		Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
 		Objective objective = board.registerNewObjective("timers", "dummy");
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-		objective.setDisplayName(TextReplace.colors(Defaults.TITLE));
-		objective.getScore(TextReplace.colors(Defaults.SPAWN_TAG)).setScore(0);
-		objective.getScore(TextReplace.colors(Defaults.PEARL_COOLDOWN)).setScore(0);
+		objective.setDisplayName(DefaultsConverted.getTitle());
+		objective.getScore(DefaultsConverted.getSpawnTag()).setScore(0);
+		objective.getScore(DefaultsConverted.getPearlCooldown()).setScore(0);
 		this.player.setScoreboard(board);
 	}
 }
