@@ -9,6 +9,12 @@ import org.bukkit.scoreboard.Objective;
 
 import com.fuzzycraft.fuzzy.HCFScoreboard;
 
+/**
+ * 
+ * @author FuzzyStatic (fuzzy@fuzzycraft.com)
+ *
+ */
+
 public class Timer {
 	
 	public HCFScoreboard plugin;

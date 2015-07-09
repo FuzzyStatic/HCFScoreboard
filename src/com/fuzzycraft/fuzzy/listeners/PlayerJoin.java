@@ -24,5 +24,4 @@ public class PlayerJoin implements Listener {
 		PlayerBoard pb = new PlayerBoard(event.getPlayer());
 		pb.createPlayerBoard();
     }
-	
 }
