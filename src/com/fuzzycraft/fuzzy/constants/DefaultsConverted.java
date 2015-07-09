@@ -8,6 +8,7 @@ package com.fuzzycraft.fuzzy.constants;
 
 public class DefaultsConverted {
 
+	// Converts & to \u00A7 for proper Minecraft colors.
 	public static String colors(String string) {
 		return string.replaceAll("&(?<!&&)(?=[0-9a-fA-F])", "\u00A7").replace("&&","&");
 	}
