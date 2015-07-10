@@ -9,8 +9,9 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 
 import com.fuzzycraft.fuzzy.HCFScoreboard;
 import com.fuzzycraft.fuzzy.constants.Defaults;
-import com.fuzzycraft.fuzzy.constants.DefaultsConverted;
+import com.fuzzycraft.fuzzy.constants.Paths;
 import com.fuzzycraft.fuzzy.listeners.Timer;
+import com.fuzzycraft.fuzzy.utilities.ColorRegex;
 
 /**
  * 
@@ -40,6 +41,6 @@ public class PlayerPearled extends Timer implements Listener {
     		super.cancel(super.map.get(player));
     	}
         
-    	super.cooldown(player, Defaults.PEARL_COOLDOWN_MAX_TIME, DefaultsConverted.getPearlCooldown());
+    	super.cooldown(player, Defaults.PEARL_COOLDOWN_MAX_TIME, ColorRegex.colors(super.plugin.getConfig().getString(Paths.PEARL_COOLDOWN_TITLE)));
     }
 }

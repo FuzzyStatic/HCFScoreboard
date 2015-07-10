@@ -10,8 +10,9 @@ import org.bukkit.event.entity.EntityDeathEvent;
 
 import com.fuzzycraft.fuzzy.HCFScoreboard;
 import com.fuzzycraft.fuzzy.constants.Defaults;
-import com.fuzzycraft.fuzzy.constants.DefaultsConverted;
+import com.fuzzycraft.fuzzy.constants.Paths;
 import com.fuzzycraft.fuzzy.listeners.Timer;
+import com.fuzzycraft.fuzzy.utilities.ColorRegex;
 
 /**
  * 
@@ -61,8 +62,8 @@ public class PlayerTagged extends Timer implements Listener {
         		cancel(super.map.get(damager));
         	}
         	
-        	super.cooldown(player, Defaults.SPAWN_TAG_MAX_TIME, DefaultsConverted.getSpawnTag());
-        	super.cooldown(damager, Defaults.SPAWN_TAG_MAX_TIME, DefaultsConverted.getSpawnTag());
+        	super.cooldown(player, Defaults.SPAWN_TAG_MAX_TIME, ColorRegex.colors(super.plugin.getConfig().getString(Paths.SPAWN_TAG_TITLE)));
+        	super.cooldown(damager, Defaults.SPAWN_TAG_MAX_TIME, ColorRegex.colors(super.plugin.getConfig().getString(Paths.SPAWN_TAG_TITLE)));
         }
     }
 	
@@ -82,6 +83,6 @@ public class PlayerTagged extends Timer implements Listener {
     		cancel(this.map.get(player));
     	}
 		
-    	super.cooldown(player, 0, DefaultsConverted.getSpawnTag());
+    	super.cooldown(player, 0, ColorRegex.colors(super.plugin.getConfig().getString(Paths.SPAWN_TAG_TITLE)));
 	}
 }
