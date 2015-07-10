@@ -40,6 +40,6 @@ public class PlayerPearled extends Timer implements Listener {
     		super.cancel(super.map.get(player));
     	}
         
-    	super.cooldown(player, Defaults.PEARL_COOLDOWN_TIMER, DefaultsConverted.getPearlCooldown());
+    	super.cooldown(player, Defaults.PEARL_COOLDOWN_MAX_TIME, DefaultsConverted.getPearlCooldown());
     }
 }

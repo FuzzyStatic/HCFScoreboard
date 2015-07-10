@@ -61,8 +61,8 @@ public class PlayerTagged extends Timer implements Listener {
         		cancel(super.map.get(damager));
         	}
         	
-        	super.cooldown(player, Defaults.SPAWN_TAG_TIMER, DefaultsConverted.getSpawnTag());
-        	super.cooldown(damager, Defaults.SPAWN_TAG_TIMER, DefaultsConverted.getSpawnTag());
+        	super.cooldown(player, Defaults.SPAWN_TAG_MAX_TIME, DefaultsConverted.getSpawnTag());
+        	super.cooldown(damager, Defaults.SPAWN_TAG_MAX_TIME, DefaultsConverted.getSpawnTag());
         }
     }
 	

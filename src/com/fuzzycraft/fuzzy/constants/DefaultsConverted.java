@@ -18,10 +18,10 @@ public class DefaultsConverted {
 	}
 	
 	public static final String getSpawnTag() {
-		return colors(Defaults.SPAWN_TAG);
+		return colors(Defaults.SPAWN_TAG_TITLE);
 	}
 	
 	public static final String getPearlCooldown() {
-		return colors(Defaults.PEARL_COOLDOWN);
+		return colors(Defaults.PEARL_COOLDOWN_TITLE);
 	}
 }
