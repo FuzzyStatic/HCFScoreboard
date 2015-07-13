@@ -16,6 +16,7 @@ import com.fuzzycraft.fuzzy.listeners.timers.PlayerTagged;
  */
 
 public class HCFScoreboard extends JavaPlugin {
+	
 	public void onEnable() {		
 		configDefaults();		
 		registerListeners();	
